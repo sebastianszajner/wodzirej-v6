@@ -5,22 +5,30 @@ export function Header() {
   const activeTab = useStore((s) => s.activeTab);
   const setTab    = useStore((s) => s.setActiveTab);
 
+  const base = import.meta.env.BASE_URL;
+
   return (
     <>
       <header className="header">
         <div className="brand">🎡 Wodzirej</div>
         <div className="badge">GRUPY + KOŁO</div>
 
-        {/* Author credit */}
+        {/* Author credit with avatar */}
         <div className="author-credit">
           Created &amp; designed by{' '}
-          <button
-            className="author-credit-link"
-            onClick={() => setTab('about')}
-            title="O autorze"
+          <a
+            href={`${base}#about`}
+            className={`author-credit-link ${activeTab === 'about' ? 'active' : ''}`}
+            onClick={(e) => { e.preventDefault(); setTab('about'); }}
+            title="O autorze — Sebastian Szajner"
           >
-            Sebastian Szajner
-          </button>
+            <img
+              src={`${base}author.jpg`}
+              alt="Sebastian Szajner"
+              className="author-avatar"
+            />
+            <span>Sebastian Szajner</span>
+          </a>
         </div>
 
         <div className="spacer" />
@@ -42,14 +50,20 @@ export function Header() {
           </button>
         ))}
 
-        {/* Subtle hidden "O autorze" tab — only highlighted when active */}
-        <button
+        {/* "O autorze" tab — avatar icon */}
+        <a
+          href={`${base}#about`}
           className={`tab-btn about-tab ${activeTab === 'about' ? 'active' : ''}`}
-          onClick={() => setTab('about')}
+          onClick={(e) => { e.preventDefault(); setTab('about'); }}
           title="O autorze"
         >
-          👤
-        </button>
+          <img
+            src={`${base}author.jpg`}
+            alt="O autorze"
+            className="tab-avatar"
+          />
+          <span className="tab-about-label">O autorze</span>
+        </a>
       </nav>
     </>
   );

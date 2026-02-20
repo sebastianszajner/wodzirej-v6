@@ -4,6 +4,7 @@ import { Header } from './components/layout/Header';
 import { ParticipantsPanel } from './components/participants/ParticipantsPanel';
 import { GroupsPanel } from './components/groups/GroupsPanel';
 import { WheelPanel } from './components/wheel/WheelPanel';
+import { AboutPanel } from './components/about/AboutPanel';
 import { Toasts } from './components/ui/Toast';
 import './styles/globals.css';
 
@@ -32,6 +33,7 @@ export default function App() {
         {activeTab === 'participants' && <ParticipantsPanel />}
         {activeTab === 'groups'       && <GroupsPanel />}
         {activeTab === 'wheel'        && <WheelPanel />}
+        {activeTab === 'about'        && <AboutPanel />}
       </main>
       <Toasts />
     </div>

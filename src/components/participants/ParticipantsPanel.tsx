@@ -1,5 +1,6 @@
 import { useStore } from '../../store';
 import { ImportDropzone } from './ImportDropzone';
+import { OcrDropzone } from './OcrDropzone';
 
 export function ParticipantsPanel() {
   const participants = useStore((s) => s.participants);
@@ -10,6 +11,7 @@ export function ParticipantsPanel() {
     <div className="panel">
       <div className="panel-body">
         <ImportDropzone />
+        <OcrDropzone />
 
         <div className="plist-header">
           <h3>Uczestnicy ({participants.length}/30)</h3>

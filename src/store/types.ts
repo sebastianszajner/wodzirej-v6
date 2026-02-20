@@ -45,7 +45,7 @@ export interface AppState {
   removeFromPool: (id: string) => void;
 
   // UI
-  activeTab: 'participants' | 'groups' | 'wheel';
+  activeTab: 'participants' | 'groups' | 'wheel' | 'about';
   setActiveTab: (t: AppState['activeTab']) => void;
   toasts: Toast[];
   showToast: (msg: string, type?: Toast['type']) => void;

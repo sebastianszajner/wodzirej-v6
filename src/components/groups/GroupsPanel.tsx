@@ -1,16 +1,20 @@
 import { useStore } from '../../store';
-import { needsLastName } from '../../logic/nicknames';
+import { canonicalFirst } from '../../logic/nicknames';
 import { useState } from 'react';
 import type { Participant } from '../../store/types';
 
 type ViewMode = 'list' | 'tile';
 
-function formatMember(member: Participant, allInGroup: Participant[]) {
+/** Zwraca inicjał nazwiska jeśli to samo imię (kanoniczne) pojawia się
+ *  więcej niż raz w całej liście uczestników. */
+function formatMember(member: Participant, allParticipants: Participant[]) {
   const fn = member.first || member.text || '?';
   const ln = member.last || '';
-  const firstNames = allInGroup.map((m) => m.first || m.text || '');
-  const needs = needsLastName(fn, firstNames);
-  if (!needs || !ln) return { fn, ln: '' };
+  const canon = canonicalFirst(fn);
+  const count = allParticipants.filter(
+    (p) => canonicalFirst(p.first || p.text || '') === canon
+  ).length;
+  if (count < 2 || !ln) return { fn, ln: '' };
   return { fn, ln: ln[0].toUpperCase() + '.' };
 }
 
@@ -141,7 +145,7 @@ export function GroupsPanel() {
             <div className="group-card-body">
               <ul>
                 {g.members.map((m) => {
-                  const { fn, ln } = formatMember(m, g.members);
+                  const { fn, ln } = formatMember(m, participants);
                   return (
                     <li key={m.id}>
                       <span className="gc-fn">{fn}</span>

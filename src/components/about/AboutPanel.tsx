@@ -55,6 +55,82 @@ const THINKING = [
   { icon: '🛠️', label: 'Coaching i praca jeden na jeden', pct: 82 },
 ];
 
+// ── OPTO by Master — 8 wymiarów osobowości (skala 1–10) ──────────────────────
+const OPTO_DIMS = [
+  {
+    dim: 'Wpływ',
+    color: '#1565c0',
+    icon: '📣',
+    score: 9,          // średnia: (9+9+8)/3
+    desc: 'Bardzo wysoka asertywność (9/10) i komunikatywność (9/10) — naturalnie przejmuję inicjatywę, wiem jak zjednać sobie ludzi i jestem bardzo przekonujący. Pewność siebie w sytuacjach społecznych (8/10).',
+    items: [
+      { label: 'Asertywność', val: 9 },
+      { label: 'Komunikacja', val: 9 },
+      { label: 'Pewność siebie', val: 8 },
+    ],
+  },
+  {
+    dim: 'Odporność',
+    color: '#2e7d32',
+    icon: '🧱',
+    score: 9,
+    desc: 'Najwyższy wynik w radzeniu sobie ze stresem (9/10) — zawsze zachowuję spokój pod presją, w stresie wykazuję się odpornością psychiczną. Opanowanie emocji w pracy (7/10).',
+    items: [
+      { label: 'Radzenie sobie ze stresem', val: 9 },
+      { label: 'Opanowanie', val: 7 },
+    ],
+  },
+  {
+    dim: 'Efektywność',
+    color: '#e65100',
+    icon: '🎯',
+    score: 10,
+    desc: 'Orientacja na cel na poziomie maksymalnym (10/10) — zawsze zdeterminowany do osiągania wyznaczonych celów, bardzo ambitny, zawsze wierzy w swoje możliwości. Pracowitość i samodyscyplina (8/10).',
+    items: [
+      { label: 'Orientacja na cel', val: 10 },
+      { label: 'Pracowitość', val: 8 },
+      { label: 'Zapał', val: 5 },
+    ],
+  },
+  {
+    dim: 'Innowacyjność',
+    color: '#6a1b9a',
+    icon: '💡',
+    score: 9,
+    desc: 'Wysoka pomysłowość (9/10) — cały czas kwestionuję istniejący stan rzeczy, mam mnóstwo nowych pomysłów. Gotowość do podejmowania ryzyka i przedsiębiorczość (8/10). Łatwo dostosowuję się do zmian (7/10).',
+    items: [
+      { label: 'Pomysłowość', val: 9 },
+      { label: 'Podejmowanie ryzyka', val: 8 },
+      { label: 'Zdolność adaptacji', val: 7 },
+    ],
+  },
+  {
+    dim: 'Sumienność',
+    color: '#37474f',
+    icon: '✅',
+    score: 8,
+    desc: 'Wysoka obowiązkowość (8/10) i szczerość (8/10) — zawsze dotrzymuję zobowiązań, można na mnie polegać, bardzo wysoko cenię autentyczność. Organizacja pracy (7/10).',
+    items: [
+      { label: 'Obowiązkowość', val: 8 },
+      { label: 'Szczerość', val: 8 },
+      { label: 'Organizacja', val: 7 },
+      { label: 'Zapewnianie jakości', val: 5 },
+    ],
+  },
+  {
+    dim: 'Współpraca',
+    color: '#00838f',
+    icon: '🤝',
+    score: 9,
+    desc: 'Bardzo wysoka otwartość i towarzyskość (9/10) — lubię pracować w zespole, łatwo nawiązuję rozmowy. Altruizm i troska o innych (6/10). Zaufanie do ludzi (5/10) — z natury weryfikuję intencje.',
+    items: [
+      { label: 'Utrzymywanie relacji', val: 9 },
+      { label: 'Altruizm', val: 6 },
+      { label: 'Zaufanie', val: 5 },
+    ],
+  },
+];
+
 // ── Podejście do procesu grupowego ───────────────────────────────────────────
 const GROUP_PROCESS = [
   {
@@ -152,6 +228,32 @@ const CLIENTS: { sector: string; icon: string; names: string[] }[] = [
     names: ['4-Eco', 'Polska Izba Firm Szkoleniowych'],
   },
 ];
+
+function OptoDimCard({ dim, color, icon, desc, items }: Omit<typeof OPTO_DIMS[0], 'score'> & { score?: number }) {
+  return (
+    <div className="opto-dim-card">
+      <div className="opto-dim-header">
+        <span className="opto-dim-icon">{icon}</span>
+        <span className="opto-dim-name">{dim}</span>
+        <div className="opto-dim-bars">
+          {items.map(it => (
+            <div key={it.label} className="opto-bar-row">
+              <span className="opto-bar-label">{it.label}</span>
+              <div className="opto-bar-track">
+                <div
+                  className="opto-bar-fill"
+                  style={{ width: `${it.val * 10}%`, background: color }}
+                />
+              </div>
+              <span className="opto-bar-val" style={{ color }}>{it.val}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+      <p className="opto-dim-desc">{desc}</p>
+    </div>
+  );
+}
 
 function DriveBar({ icon, label, bar, color, desc }: typeof DRIVES[0]) {
   return (
@@ -297,6 +399,23 @@ export function AboutPanel() {
             </p>
             <div className="rmp-bars">
               {THINKING.map(t => <ThinkingBar key={t.label} {...t} />)}
+            </div>
+          </div>
+
+          {/* OPTO by Master — 8 wymiarów */}
+          <div className="about-psych-card about-psych-card--wide">
+            <div className="about-psych-header">
+              <span className="about-psych-badge opto-badge">📊 OPTO · Master</span>
+              <span className="about-psych-name">Profil osobowości — 8 wymiarów (skala 1–10)</span>
+            </div>
+            <p className="about-psych-desc">
+              Badanie OPTO (Master, 06.10.2025) mierzy 8 kluczowych wymiarów osobowości z punktu
+              widzenia efektywności w pracy. Dwa dominujące obszary to <strong>Wpływ</strong> i{' '}
+              <strong>Innowacyjność</strong> — co przekłada się na styl pracy: inicjatywa,
+              perswazja, nieustanne kwestionowanie status quo i orientacja na cel maksymalny (10/10).
+            </p>
+            <div className="opto-dims-grid">
+              {OPTO_DIMS.map(d => <OptoDimCard key={d.dim} {...d} />)}
             </div>
           </div>
 

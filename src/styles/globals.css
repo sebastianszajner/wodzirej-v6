@@ -81,10 +81,17 @@ input, select { font: inherit; }
 
 /* Author credit in header */
 .author-credit {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 4px;
   font-size: 10px;
   color: rgba(255,255,255,0.22);
   white-space: nowrap;
-  letter-spacing: .2px;
+}
+.author-credit-static {
+  font-size: 10px;
+  color: rgba(255,255,255,0.22);
 }
 .author-credit-link {
   display: inline-flex;
@@ -92,36 +99,117 @@ input, select { font: inherit; }
   gap: 5px;
   background: none;
   border: none;
-  color: rgba(255,255,255,0.5);
+  color: rgba(255,255,255,0.55);
   font-size: 10px;
   font-weight: 600;
   cursor: pointer;
-  padding: 2px 4px 2px 2px;
+  padding: 2px 6px 2px 2px;
   border-radius: 20px;
-  text-decoration: none;
   transition: color .15s, background .15s;
 }
-.author-credit-link:hover {
+.author-credit-link:hover,
+.author-credit-link.open {
   color: #fff;
-  background: rgba(255,255,255,0.08);
-}
-.author-credit-link.active {
-  color: var(--accent);
+  background: rgba(255,255,255,0.1);
 }
 
 /* Small avatar in header credit */
 .author-avatar {
-  width: 20px;
-  height: 20px;
+  width: 22px;
+  height: 22px;
   border-radius: 50%;
   object-fit: cover;
   object-position: center top;
-  border: 1.5px solid rgba(255,255,255,0.25);
+  border: 1.5px solid rgba(255,255,255,0.3);
   flex-shrink: 0;
 }
 
+/* ── Popup chmurka ───────────────────────────────────────────────────────── */
+.author-popup {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 0;
+  z-index: 200;
+  width: 310px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.35);
+  animation: popupIn .15s ease;
+}
+@keyframes popupIn {
+  from { opacity: 0; transform: translateY(-6px) scale(.97); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+.author-popup-arrow {
+  position: absolute;
+  top: -7px;
+  left: 28px;
+  width: 14px;
+  height: 14px;
+  background: var(--bg-card);
+  border-left: 1px solid var(--border);
+  border-top: 1px solid var(--border);
+  transform: rotate(45deg);
+  border-radius: 2px 0 0 0;
+}
+.author-popup-body {
+  display: flex;
+  gap: 14px;
+  padding: 16px;
+  align-items: flex-start;
+}
+.author-popup-photo {
+  width: 72px;
+  height: 90px;
+  border-radius: 8px;
+  object-fit: cover;
+  object-position: center top;
+  flex-shrink: 0;
+  border: 1px solid var(--border);
+}
+.author-popup-text {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  flex: 1;
+  min-width: 0;
+}
+.author-popup-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--txt-main);
+  display: block;
+}
+.author-popup-role {
+  font-size: 11px;
+  color: var(--accent);
+  display: block;
+  margin-bottom: 4px;
+}
+.author-popup-bio {
+  font-size: 11px;
+  color: var(--txt-muted);
+  line-height: 1.5;
+  margin: 0 0 10px;
+}
+.author-popup-bio strong { color: var(--txt-main); }
+.author-popup-btn {
+  display: inline-block;
+  background: var(--accent);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 5px 12px;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity .15s;
+  align-self: flex-start;
+}
+.author-popup-btn:hover { opacity: .85; }
+
 /* "O autorze" tab with avatar */
-a.tab-btn.about-tab,
 .tab-btn.about-tab {
   margin-left: auto;
   padding: 0 8px;
@@ -130,20 +218,16 @@ a.tab-btn.about-tab,
   gap: 6px;
   opacity: 0.45;
   transition: opacity .2s, color .15s;
-  text-decoration: none;
-  color: inherit;
 }
-a.tab-btn.about-tab:hover,
 .tab-btn.about-tab:hover { opacity: 0.85; }
-a.tab-btn.about-tab.active,
 .tab-btn.about-tab.active {
   opacity: 1;
   color: var(--accent);
   border-bottom-color: var(--accent);
 }
 .tab-avatar {
-  width: 24px;
-  height: 24px;
+  width: 26px;
+  height: 26px;
   border-radius: 50%;
   object-fit: cover;
   object-position: center top;
@@ -151,7 +235,6 @@ a.tab-btn.about-tab.active,
   flex-shrink: 0;
   transition: border-color .15s;
 }
-a.tab-btn.about-tab.active .tab-avatar,
 .tab-btn.about-tab.active .tab-avatar {
   border-color: var(--accent);
 }

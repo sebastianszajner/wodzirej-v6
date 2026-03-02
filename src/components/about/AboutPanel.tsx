@@ -131,6 +131,64 @@ const OPTO_DIMS = [
   },
 ];
 
+// ── Tematy szkoleniowe & kompetencje ─────────────────────────────────────────
+const TRAINING_AREAS = [
+  {
+    icon: '/about/icon-ai.png',
+    title: 'AI w biznesie',
+    level: 'Flagowy temat',
+    desc: 'Od podstaw po zaawansowane wdrożenia. Prompt engineering, automatyzacja procesów, AI w sprzedaży i zarządzaniu.',
+    tags: ['ChatGPT', 'Claude', 'Gemini', 'Copilot', 'Automatyzacja'],
+  },
+  {
+    icon: '/about/icon-sales.png',
+    title: 'Psychologia sprzedaży',
+    level: '2 dni',
+    desc: 'Challenger Sale, SPIN Selling, psychologia decyzji zakupowych, praca z oporem klienta.',
+    tags: ['Challenger Sale', 'SPIN', 'Negocjacje', 'Obiekcje'],
+  },
+  {
+    icon: '/about/icon-communication.png',
+    title: 'Komunikacja',
+    level: '1–2 dni',
+    desc: 'Feedback, NVC, prezentacje, storytelling, trudne rozmowy, asertywność.',
+    tags: ['NVC', 'Feedback', 'Storytelling', 'Asertywność'],
+  },
+  {
+    icon: '/about/icon-leadership.png',
+    title: 'Zarządzanie & Przywództwo',
+    level: '1–2 dni',
+    desc: 'VUCA leadership, zarządzanie zespołem, delegowanie, motywowanie, zarządzanie zmianą.',
+    tags: ['VUCA', 'Delegowanie', 'Motywacja', 'Zmiana'],
+  },
+  {
+    icon: '/about/icon-effectiveness.png',
+    title: 'Efektywność osobista',
+    level: '1 dzień',
+    desc: 'GTD, Deep Work, zarządzanie energią, priorytetyzacja, produktywność w erze AI.',
+    tags: ['GTD', 'Deep Work', 'Priorytety', 'Nawyki'],
+  },
+  {
+    icon: '/about/icon-group.png',
+    title: 'Praca z grupą',
+    level: '1–2 dni',
+    desc: 'Dynamika grupowa, facylitacja, moderowanie dyskusji, zarządzanie konfliktem w grupie.',
+    tags: ['Facylitacja', 'Dynamika', 'Tuckman', 'World Café'],
+  },
+  {
+    icon: '/about/icon-ttt.png',
+    title: 'Train the Trainer',
+    level: '2–3 dni',
+    desc: 'Projektowanie szkoleń (ROPES), metody aktywne, praca z energią grupy, ewaluacja.',
+    tags: ['ROPES', 'Metody aktywne', 'Ewaluacja', 'Kirkpatrick'],
+  },
+];
+
+const METHODOLOGIES = [
+  'Challenger Sale', 'SPIN Selling', 'NVC', 'Design Thinking',
+  'GTD', 'ROPES', 'Kirkpatrick', 'Tuckman', 'Kolb', 'DISC',
+];
+
 // ── Podejście do procesu grupowego ───────────────────────────────────────────
 const GROUP_PROCESS = [
   {
@@ -165,22 +223,52 @@ const CLIENTS: { sector: string; icon: string; names: string[] }[] = [
   {
     sector: 'Bankowość & Finanse',
     icon: '🏦',
-    names: ['AASA Poland', 'Alior Bank', 'Aviva', 'Bank BPH', 'Noble Bank', 'PKO Bank Polski'],
+    names: ['AASA Poland', 'Alior Bank', 'Bank BPH', 'CERI International', 'Noble Bank'],
   },
   {
-    sector: 'Consulting & Doradztwo',
-    icon: '💼',
-    names: ['Capgemini', 'Certes', 'Deloitte', 'House of Skills', 'McKinsey & Company', 'Teamformacja'],
+    sector: 'Ubezpieczenia',
+    icon: '🛡️',
+    names: ['Aviva', 'Generali'],
   },
   {
-    sector: 'FMCG & Retail',
-    icon: '🛒',
-    names: ['Allegro', 'Danone', 'Empik', 'Intersnack', 'Japan Tobacco International (JTI)', 'Lidl', 'L\'Oréal', 'Philip Morris Polska', 'Tobacco Trading International (TTI)'],
-  },
-  {
-    sector: 'IT, E-commerce & Technologie',
+    sector: 'IT & Technologie',
     icon: '💻',
-    names: ['Atman', 'CERI', 'InPost', 'Packhelp', 'Solenerga'],
+    names: ['Atman', 'Capgemini', 'InPost', 'ISCH', 'Packhelp'],
+  },
+  {
+    sector: 'Consulting & Doradztwo biznesowe',
+    icon: '💼',
+    names: ['Deloitte', 'McKinsey & Company'],
+  },
+  {
+    sector: 'Szkolenia & Rozwój (L&D)',
+    icon: '🎓',
+    names: ['Certes', 'CERI', 'House of Skills', 'Polska Izba Firm Szkoleniowych', 'Teamformacja', 'Wszechnica UJ'],
+  },
+  {
+    sector: 'FMCG & Artykuły konsumenckie',
+    icon: '🛒',
+    names: ['Coty', 'Danone', 'Intersnack', 'Japan Tobacco International (JTI)', 'L\'Oréal', 'Philip Morris Polska', 'Tobacco Trading International (TTI)'],
+  },
+  {
+    sector: 'Retail & E-commerce',
+    icon: '🛍️',
+    names: ['Allegro', 'Empik', 'Lidl', 'NEINVER (Factory Outlets)'],
+  },
+  {
+    sector: 'Rekrutacja & HR',
+    icon: '👔',
+    names: ['Adecco', 'Antal', 'Benefit Systems (MultiSport)'],
+  },
+  {
+    sector: 'Ochrona Zdrowia & Farmacja',
+    icon: '💊',
+    names: ['Apteki DOZ', 'Narodowy Fundusz Zdrowia (NFZ)'],
+  },
+  {
+    sector: 'Dystrybucja & Logistyka',
+    icon: '📦',
+    names: ['Agility Logistics', 'Lyreco', 'Orange'],
   },
   {
     sector: 'Motoryzacja & Wynajem',
@@ -188,24 +276,14 @@ const CLIENTS: { sector: string; icon: string; names: string[] }[] = [
     names: ['99Rent'],
   },
   {
-    sector: 'Ochrona Zdrowia & Farmacja',
-    icon: '💊',
-    names: ['Apteki DOZ', 'Benefit System', 'Narodowy Fundusz Zdrowia (NFZ)'],
+    sector: 'OZE & Energetyka',
+    icon: '⚡',
+    names: ['4-Eco (fotowoltaika)', 'Solenerga'],
   },
   {
-    sector: 'Rekrutacja & HR',
-    icon: '👔',
-    names: ['Adecco', 'Agility', 'Antal', 'Helpea'],
-  },
-  {
-    sector: 'Ubezpieczenia',
-    icon: '🛡️',
-    names: ['Generali'],
-  },
-  {
-    sector: 'Dystrybucja & Logistyka',
-    icon: '📦',
-    names: ['Lyreco', 'NEINVER', 'Orange'],
+    sector: 'Branża prawna & Odszkodowania',
+    icon: '⚖️',
+    names: ['Helpea'],
   },
   {
     sector: 'Administracja publiczna & NGO',
@@ -215,17 +293,10 @@ const CLIENTS: { sector: string; icon: string; names: string[] }[] = [
       'Akademia Przyszłości',
       'Fundacja im. Lesława Pagi',
       'Fundacja Rozwoju Przedsiębiorczości „Twój Startup"',
-      'ISCH',
       'Ministerstwo Środowiska',
       'Ministerstwo Sprawiedliwości',
       'Szkoła Główna Gospodarstwa Wiejskiego (SGGW)',
-      'Wszechnica UJ',
     ],
-  },
-  {
-    sector: 'Coachin & Szkolenia',
-    icon: '🎓',
-    names: ['4-Eco', 'Polska Izba Firm Szkoleniowych'],
   },
 ];
 
@@ -343,6 +414,42 @@ export function AboutPanel() {
               </div>
             </div>
           ))}
+        </div>
+
+        {/* ── Tematy szkoleniowe & kompetencje ─────────────────────────── */}
+        <div className="about-section-title">Tematy szkoleniowe & kompetencje</div>
+        <p className="about-intro-text">
+          7 głównych obszarów tematycznych, w których prowadzę szkolenia i warsztaty.
+          Każdy temat adaptuję do poziomu grupy — od podstawowego po zaawansowany.
+        </p>
+        <div className="training-areas-grid">
+          <img src="/about/banner-training.png" alt="Obszary szkoleniowe" className="training-banner" />
+          {TRAINING_AREAS.map(area => (
+            <div key={area.title} className="training-area-card">
+              <div className="training-area-header">
+                <img src={area.icon} alt={area.title} className="training-area-icon" />
+                <div>
+                  <strong className="training-area-title">{area.title}</strong>
+                  <span className="training-area-level">{area.level}</span>
+                </div>
+              </div>
+              <p className="training-area-desc">{area.desc}</p>
+              <div className="training-area-tags">
+                {area.tags.map(tag => (
+                  <span key={tag} className="training-area-tag">{tag}</span>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="training-methodologies">
+          <span className="training-methodologies-label">Metodologie & frameworki:</span>
+          <div className="training-methodologies-list">
+            {METHODOLOGIES.map(m => (
+              <span key={m} className="training-methodology-chip">{m}</span>
+            ))}
+          </div>
         </div>
 
         {/* ── Profil osobowościowy ──────────────────────────────────────── */}

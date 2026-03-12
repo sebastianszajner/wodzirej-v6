@@ -3,11 +3,11 @@ import { useStore } from '../../store';
 import { useEnabledTabs } from '../../store/settings';
 import { CORE_TABS, EXTRA_TABS, TAB_META } from '../../store/types';
 
-const CORE_META: Record<string, { emoji: string; label: string }> = {
-  participants: { emoji: '📋', label: 'Uczestnicy' },
-  groups:       { emoji: '👥', label: 'Grupy' },
-  wheel:        { emoji: '🎡', label: 'Koło fortuny' },
-  score:        { emoji: '🏆', label: 'Ranking' },
+const CORE_META: Record<string, { emoji: string; label: string; shortLabel: string }> = {
+  participants: { emoji: '📋', label: 'Uczestnicy', shortLabel: 'Osoby' },
+  groups:       { emoji: '👥', label: 'Grupy',      shortLabel: 'Grupy' },
+  wheel:        { emoji: '🎡', label: 'Koło fortuny', shortLabel: 'Koło' },
+  score:        { emoji: '🏆', label: 'Ranking',    shortLabel: 'Ranking' },
 };
 
 export function Header() {
@@ -89,10 +89,6 @@ export function Header() {
 
   // Visible extra tabs (only enabled ones)
   const visibleExtra = EXTRA_TABS.filter((t) => isEnabled(t));
-
-  // Auto-compact: icon-only when too many tabs to fit without scrolling
-  const totalTabs = CORE_TABS.length + visibleExtra.length + 1; // +1 for "about"
-  const compact = totalTabs > 6;
 
   return (
     <>
@@ -192,7 +188,7 @@ export function Header() {
         </div>
       </header>
 
-      <nav className={`tabs ${compact ? 'tabs--compact' : ''}`}>
+      <nav className="tabs">
         {/* Core tabs — always visible */}
         {CORE_TABS.map((tab) => {
           const isActive = activeTab === tab;
@@ -202,10 +198,10 @@ export function Header() {
               key={tab}
               className={`tab-btn ${isActive ? 'active' : ''}`}
               onClick={() => setTab(tab)}
-              title={compact && !isActive ? meta.label : undefined}
+              title={meta.label}
             >
               <span className="tab-emoji">{meta.emoji}</span>
-              <span className="tab-label">{meta.label}</span>
+              <span className="tab-label">{meta.shortLabel}</span>
             </button>
           );
         })}
@@ -219,10 +215,10 @@ export function Header() {
               key={tab}
               className={`tab-btn ${isActive ? 'active' : ''}`}
               onClick={() => setTab(tab)}
-              title={compact && !isActive ? meta.label : undefined}
+              title={meta.label}
             >
               <span className="tab-emoji">{meta.emoji}</span>
-              <span className="tab-label">{meta.label}</span>
+              <span className="tab-label">{meta.shortLabel}</span>
             </button>
           );
         })}
@@ -235,7 +231,7 @@ export function Header() {
           type="button"
         >
           <img src={`${base}author.jpg`} alt="O autorze" className="tab-avatar" />
-          <span className="tab-label tab-about-label">O autorze</span>
+          <span className="tab-label">Info</span>
         </button>
       </nav>
     </>

@@ -264,21 +264,11 @@ input, select { font: inherit; }
   .header { gap: 8px; padding: 0 12px; }
   .header .count-pill { font-size: 10px; padding: 2px 8px; white-space: nowrap; }
 
-  /* Tabs: compact icon-only on mobile, scroll if still overflows */
-  .tabs {
-    overflow-x: auto;
-    overflow-y: hidden;
-    scrollbar-width: none;
-    -webkit-overflow-scrolling: touch;
-    flex-wrap: nowrap;
-    padding: 0 4px;
-  }
-  .tabs::-webkit-scrollbar { display: none; }
-  .tab-btn { padding: 0 10px; font-size: 12px; flex-shrink: 0; }
-  .tab-btn .tab-label { display: none; }
-  .tab-btn.active .tab-label { display: inline; }
-  .tab-about-label { display: none !important; }
-  .tab-btn.about-tab { padding: 0 10px; }
+  /* Tabs: even smaller on mobile */
+  .tabs { padding: 1px 2px; }
+  .tab-btn { padding: 4px 1px 3px; }
+  .tab-emoji { font-size: 16px; }
+  .tab-label { font-size: 7px; }
 
   /* Popup: dopasuj do szerokości ekranu */
   .author-popup { right: -12px; width: calc(100vw - 24px); max-width: 300px; }
@@ -286,23 +276,16 @@ input, select { font: inherit; }
 
 /* "O autorze" tab with avatar */
 .tab-btn.about-tab {
-  margin-left: auto;
-  padding: 0 8px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  opacity: 0.45;
+  opacity: 0.55;
   transition: opacity .2s, color .15s;
 }
 .tab-btn.about-tab:hover { opacity: 0.85; }
 .tab-btn.about-tab.active {
   opacity: 1;
-  color: var(--accent);
-  border-bottom-color: var(--accent);
 }
 .tab-avatar {
-  width: 26px;
-  height: 26px;
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
   object-fit: cover;
   object-position: center top;
@@ -312,10 +295,6 @@ input, select { font: inherit; }
 }
 .tab-btn.about-tab.active .tab-avatar {
   border-color: var(--accent);
-}
-.tab-about-label {
-  font-size: 12px;
-  font-weight: 500;
 }
 
 /* ── About page ──────────────────────────────────────────────────────── */
@@ -638,46 +617,50 @@ input, select { font: inherit; }
   align-items: stretch;
   background: var(--bg2);
   border-bottom: 1px solid var(--line);
-  padding: 0 8px;
-  gap: 2px;
-  overflow: hidden;
+  padding: 2px 4px;
+  gap: 0;
+  overflow: hidden; /* NEVER scroll */
+  flex-wrap: nowrap;
 }
 .tab-btn {
-  padding: 0 18px;
-  font-size: 13px;
+  flex: 1 1 0;
+  min-width: 0;
+  padding: 6px 2px 4px;
+  font-size: 10px;
   font-weight: 600;
   color: var(--txt-muted);
   background: transparent;
   border-bottom: 2px solid transparent;
-  transition: color .15s, border-color .15s, padding .2s, gap .2s;
+  transition: color .15s, border-color .15s, background .15s;
   white-space: nowrap;
-  flex-shrink: 0;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 5px;
+  justify-content: center;
+  gap: 1px;
+  cursor: pointer;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
-.tab-emoji { flex-shrink: 0; }
-.tab-btn:hover { color: var(--txt-main); }
+.tab-emoji {
+  flex-shrink: 0;
+  font-size: 20px;
+  line-height: 1.2;
+}
+.tab-label {
+  display: block;
+  font-size: 9px;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+.tab-btn:hover { color: var(--txt-main); background: rgba(255,255,255,0.04); }
 .tab-btn.active {
   color: var(--accent);
   border-bottom-color: var(--accent);
-}
-
-/* Compact mode: icon-only, active tab shows label */
-.tabs--compact .tab-btn {
-  padding: 0 12px;
-}
-.tabs--compact .tab-btn .tab-label {
-  display: none;
-}
-.tabs--compact .tab-btn.active .tab-label {
-  display: inline;
-}
-.tabs--compact .tab-btn.about-tab .tab-about-label {
-  display: none;
-}
-.tabs--compact .tab-btn.about-tab.active .tab-about-label {
-  display: inline;
+  background: rgba(233, 30, 99, 0.08);
 }
 
 /* ── Panel body ──────────────────────────────────────────────────────── */
@@ -2377,30 +2360,24 @@ input, select { font: inherit; }
     padding: 8px 12px;
   }
 
-  /* Tabs — duże ikony jak w grze */
+  /* Tabs — duże ikony jak w grze, wertykalne z etykietami */
   .tabs {
-    gap: 6px;
-    padding: 0 20px;
+    padding: 4px 8px;
   }
   .tab-btn {
-    font-size: 20px;
-    padding: 0 22px;
-    gap: 10px;
-    font-weight: 700;
+    padding: 8px 4px 6px;
+    gap: 2px;
   }
   .tab-emoji {
     font-size: 28px;
   }
-  .tabs--compact .tab-btn {
-    padding: 0 18px;
-    font-size: 18px;
-  }
-  .tabs--compact .tab-emoji {
-    font-size: 32px;
+  .tab-label {
+    font-size: 11px;
+    font-weight: 700;
   }
   .tab-btn.about-tab .tab-avatar {
-    width: 40px;
-    height: 40px;
+    width: 28px;
+    height: 28px;
   }
 
   /* Buttons — duże, widoczne z daleka */
@@ -2625,17 +2602,15 @@ input, select { font: inherit; }
   }
 
   .tab-btn {
-    font-size: 24px;
-    padding: 0 28px;
+    padding: 10px 4px 8px;
+    gap: 3px;
   }
   .tab-emoji {
-    font-size: 36px;
+    font-size: 32px;
   }
-  .tabs--compact .tab-btn {
-    padding: 0 22px;
-  }
-  .tabs--compact .tab-emoji {
-    font-size: 40px;
+  .tab-label {
+    font-size: 12px;
+    font-weight: 700;
   }
 
   .btn {

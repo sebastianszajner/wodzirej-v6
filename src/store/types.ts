@@ -50,19 +50,19 @@ export type CoreTab = typeof CORE_TABS[number];
 export type ExtraTab = typeof EXTRA_TABS[number];
 export type Tab = typeof ALL_TABS[number];
 
-export const TAB_META: Record<ExtraTab, { emoji: string; label: string; desc: string }> = {
-  timer:      { emoji: '⏱️', label: 'Timer',       desc: 'Countdown, stoper, breakout timer' },
-  poll:       { emoji: '📊', label: 'Głosowanie',  desc: 'Szybkie ankiety i głosowania' },
-  icebreaker: { emoji: '🧊', label: 'Lodołamacz',  desc: 'Losowe pytania na rozgrzewkę' },
-  parking:    { emoji: '🅿️', label: 'Parking',      desc: 'Pytania i tematy "na później"' },
-  energy:     { emoji: '🔋', label: 'Energia',      desc: 'Pulse-check energii grupy' },
-  noise:      { emoji: '🔊', label: 'Hałas',        desc: 'Miernik poziomu dźwięku' },
-  wordcloud:  { emoji: '☁️', label: 'Chmura słów',  desc: 'Generuj word cloud z haseł grupy' },
-  retro:      { emoji: '🔄', label: 'Retro',        desc: 'Start / Stop / Continue' },
-  queue:      { emoji: '🎤', label: 'Kolejka',      desc: 'Kolejka mówców z timerem' },
-  agenda:     { emoji: '📋', label: 'Agenda',       desc: 'Timeline dnia z progress bar' },
-  kahoot:     { emoji: '🧠', label: 'Quiz',         desc: 'Kahoot-style quiz z punktami' },
-  report:     { emoji: '📈', label: 'Raport',       desc: 'Aktywności uczestników i raporty' },
+export const TAB_META: Record<ExtraTab, { emoji: string; label: string; shortLabel: string; desc: string }> = {
+  timer:      { emoji: '⏱️', label: 'Timer',       shortLabel: 'Timer',   desc: 'Countdown, stoper, breakout timer' },
+  poll:       { emoji: '📊', label: 'Głosowanie',  shortLabel: 'Ankieta', desc: 'Szybkie ankiety i głosowania' },
+  icebreaker: { emoji: '🧊', label: 'Lodołamacz',  shortLabel: 'Lód',     desc: 'Losowe pytania na rozgrzewkę' },
+  parking:    { emoji: '🅿️', label: 'Parking',      shortLabel: 'Parking', desc: 'Pytania i tematy "na później"' },
+  energy:     { emoji: '🔋', label: 'Energia',      shortLabel: 'Energia', desc: 'Pulse-check energii grupy' },
+  noise:      { emoji: '🔊', label: 'Hałas',        shortLabel: 'Hałas',   desc: 'Miernik poziomu dźwięku' },
+  wordcloud:  { emoji: '☁️', label: 'Chmura słów',  shortLabel: 'Chmura',  desc: 'Generuj word cloud z haseł grupy' },
+  retro:      { emoji: '🔄', label: 'Retro',        shortLabel: 'Retro',   desc: 'Start / Stop / Continue' },
+  queue:      { emoji: '🎤', label: 'Kolejka',      shortLabel: 'Kolejka', desc: 'Kolejka mówców z timerem' },
+  agenda:     { emoji: '📋', label: 'Agenda',       shortLabel: 'Agenda',  desc: 'Timeline dnia z progress bar' },
+  kahoot:     { emoji: '🧠', label: 'Quiz',         shortLabel: 'Quiz',    desc: 'Kahoot-style quiz z punktami' },
+  report:     { emoji: '📈', label: 'Raport',       shortLabel: 'Raport',  desc: 'Aktywności uczestników i raporty' },
 };
 
 // ── Parking Lot ──────────────────────────────────────────────────────────────

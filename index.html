@@ -1,15 +1,26 @@
 <!doctype html>
-<html lang="en">
+<html lang="pl">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Wodzirej — Grupy & Koło Fortuny</title>
-    <meta name="description" content="Aplikacja do podziału uczestników na grupy i losowania koła fortuny" />
-    <meta name="cache-bust" content="v20260220-3" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Wodzirej — Narzędzia Trenerskie</title>
+    <meta name="description" content="Koło fortuny, grupy, quiz, timer i więcej — narzędzia do prowadzenia warsztatów" />
+    <meta name="theme-color" content="#e91e63" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <link rel="manifest" href="/wodzirej-v6/manifest.json" />
+    <meta name="cache-bust" content="v20260228" />
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', function() {
+          navigator.serviceWorker.register('/wodzirej-v6/sw.js').catch(function() {});
+        });
+      }
+    </script>
   </body>
 </html>

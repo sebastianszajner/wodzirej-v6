@@ -1,0 +1,1 @@
+import{a as n}from"./qrcode-CmEn-Zwp.js";function u(){const[e,t]=n.useState(!1);n.useEffect(()=>{if(!e)return;const s=setTimeout(()=>t(!1),3e3);return()=>clearTimeout(s)},[e]);const r=n.useCallback(s=>{if(!e){t(!0);return}s(),t(!1)},[e]);return{pending:e,handleClick:r,className:e?"btn--confirm-shake":""}}export{u};
